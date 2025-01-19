@@ -1,7 +1,7 @@
 
 
 
-import '../../../recipe/data/recipe_model.dart';
+import '../../../../core/database/model/recipe_model.dart';
 
 class HomeState {}
 

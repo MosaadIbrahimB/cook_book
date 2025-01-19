@@ -1,4 +1,4 @@
-import 'package:cook_book/feature/recipe/data/recipe_model.dart';
+import 'package:cook_book/core/database/model/recipe_model.dart';
 import 'package:flutter/material.dart';
 class CookTimeAndPrepTimeWidget extends StatelessWidget {
  final RecipeModel recipeModel;

@@ -1,5 +1,5 @@
 import 'package:cook_book/core/utils/app_image_path.dart';
-import 'package:cook_book/feature/recipe/data/recipe_model.dart';
+import 'package:cook_book/core/database/model/recipe_model.dart';
 import 'package:flutter/material.dart';
 
 class ImageRecipeWidget extends StatelessWidget {

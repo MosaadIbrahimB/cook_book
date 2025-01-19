@@ -1,5 +1,5 @@
 import 'package:cook_book/feature/recipe/data/data.dart';
-import 'package:cook_book/feature/recipe/data/recipe_model.dart';
+import 'package:cook_book/core/database/model/recipe_model.dart';
 import 'package:cook_book/feature/recipe/presentation/widget/card_widget.dart';
 import 'package:cook_book/feature/recipe/presentation/widget/cook_time_and_prep_time_widget.dart';
 import 'package:cook_book/feature/recipe/presentation/widget/image_recipe_widget.dart';
@@ -31,7 +31,7 @@ class ListRecipeWidget extends StatelessWidget {
                     children: [
                       // اسم الوصفة
                       Text(
-                        list[index].recipeName,
+                        list[index].nameRecipe,
                         style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,

@@ -3,6 +3,8 @@ import 'package:cook_book/feature/layout/presentation/layout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../feature/add/presentation/add_screen.dart';
+
 class CookBookApp extends StatelessWidget {
   const CookBookApp({super.key});
 
@@ -22,7 +24,7 @@ class CookBookApp extends StatelessWidget {
           scaffoldBackgroundColor: const Color(
               0xFFFFF8DC), // cornsilk background
         ),
-        home: const LayoutScreen(),
+        home: AddScreen(),
       ),
     );
   }

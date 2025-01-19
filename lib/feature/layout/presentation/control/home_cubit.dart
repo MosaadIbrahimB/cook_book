@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../recipe/data/data.dart';
-import '../../../recipe/data/recipe_model.dart';
+import '../../../../core/database/model/recipe_model.dart';
 import 'home_state.dart';
 
 

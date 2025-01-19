@@ -1,8 +1,8 @@
-import 'package:cook_book/feature/recipe/data/recipe_model.dart';
+import 'package:cook_book/core/database/model/recipe_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-import 'category_data_model.dart';
+import '../../feature/home/data/category_data_model.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._init();
@@ -22,7 +22,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 3,
       onCreate: _createDB,
     );
   }
@@ -31,7 +31,7 @@ class DatabaseHelper {
     await db.execute('''
     CREATE TABLE categories (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL,
+      nameCategory TEXT NOT NULL,
       image TEXT
     )
     ''');
@@ -40,6 +40,7 @@ class DatabaseHelper {
     CREATE TABLE recipes (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       categoryId INTEGER NOT NULL,
+      category TEXT,
       name TEXT,
       ingredients TEXT,
       instructions TEXT,

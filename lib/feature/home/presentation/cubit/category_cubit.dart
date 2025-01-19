@@ -1,5 +1,5 @@
 import 'package:cook_book/feature/home/data/category_data_model.dart';
-import 'package:cook_book/feature/home/data/data_base.dart';
+import 'package:cook_book/core/database/data_base.dart';
 import 'package:cook_book/feature/home/presentation/cubit/category_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

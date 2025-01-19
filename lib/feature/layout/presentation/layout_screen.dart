@@ -4,7 +4,7 @@ import 'package:cook_book/feature/favorite/favorite_screen.dart';
 import 'package:cook_book/feature/home/home_screen.dart';
 import 'package:cook_book/feature/home/presentation/cubit/category_cubit.dart';
 import 'package:cook_book/feature/layout/presentation/widget/app_bar_widget.dart';
-import 'package:cook_book/feature/recipe/data/recipe_model.dart';
+import 'package:cook_book/core/database/model/recipe_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +20,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
   List<Widget> screen = [
     const HomeScreen(),
    const FavScreen(),
-    const AddScreen()
+     const AddScreen()
   ];
 
   @override
@@ -137,7 +137,7 @@ class RecipeUIWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(recipeModel.recipeName),
+        Text(recipeModel.nameRecipe),
       ],
     );
   }
