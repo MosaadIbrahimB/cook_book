@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cook_book/core/utils/app_image_path.dart';
 import 'package:cook_book/core/database/model/recipe_model.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +20,12 @@ class ImageRecipeWidget extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: AssetImage(
-            recipeModel.image ?? AppImagePath.dessert,
-          ),
+          image:
+          FileImage(File(recipeModel.image??"")),
+
+          // AssetImage(
+          //   recipeModel.image ?? AppImagePath.dessert,
+          // ),
         ),
         color: Colors.orange,
         borderRadius: const BorderRadius.only(

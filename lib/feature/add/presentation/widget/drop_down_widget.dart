@@ -15,8 +15,8 @@ class DropDownWidget extends StatelessWidget {
       const InputDecoration(labelText: 'Category'),
       items: AddCubit.get(context).categoryList
           .map((category) => DropdownMenuItem(
-        value: category,
-        child: Text(category),
+        value: category.categoryName,
+        child: Text(category.categoryName),
       ))
           .toList(),
       onChanged: (value) {

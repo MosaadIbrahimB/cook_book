@@ -1,84 +1,79 @@
-import 'dart:io';
 import 'package:cook_book/feature/add/cubit/add_cubit.dart';
+import 'package:cook_book/feature/add/cubit/image_cubit.dart';
+import 'package:cook_book/feature/add/cubit/image_state.dart';
+import 'package:cook_book/feature/home/presentation/cubit/home_cubit.dart';
+import 'package:cook_book/feature/layout/presentation/control/layout_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ImageInputField extends StatefulWidget {
+
+
+class ImageInputField extends StatelessWidget {
   const ImageInputField({super.key});
-
-  @override
-  _ImageInputFieldState createState() => _ImageInputFieldState();
-}
-
-class _ImageInputFieldState extends State<ImageInputField> {
-  File? _imageFile;
-
-  Future<void> _pickImage(ImageSource source) async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: source);
-
-    if (pickedFile != null) {
-      setState(() {
-        _imageFile = File(pickedFile.path);
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          _imageFile != null?    Image.file(
-            _imageFile!,
-            height: 100,
-            width: 100,
-            fit: BoxFit.fill,
-          )
-              :
-          const Text('No image selected yet.'),
+      child: BlocBuilder<ImageCubit, ImageState>(
+        builder: (context, state) {
+          if (state is ImageLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is ImageSucceed) {
+            return Image.file(
+              state.file,
+              height: 100,
+              width: 100,
+              fit: BoxFit.fill,
+            );
+          }
+          if (state is ImageInitial) {
+            return Column(
+              children: [
+                const Text('No image selected yet.'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        ImageCubit.get(context)
+                            .pickImage(ImageSource.camera)
+                            .then((value) {
+                          if (context.mounted) {
+                            AddCubit.get(context).pathImage = value;
 
-          const SizedBox(height: 20),
+                            print("source.name $value");
+                          }
+                        });
+                      },
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  try {
-                    _pickImage(ImageSource.camera).then((value) {
-                      if (_imageFile!.path.isNotEmpty) {
-                        if (context.mounted) {
-                          AddCubit.get(context).pathImage = _imageFile!.path;
-                        }
-                        print(_imageFile!.path);
-                      }
-                    },);
-
-                  } on Exception catch (e) {
-                 print(e);
-                  }
-                },
-                child: const Text('camera'),
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-
-                  try {
-                    _pickImage(ImageSource.gallery);
-                    AddCubit.get(context).pathImage=_imageFile!.path;
-                    print(_imageFile!.path);
-                  } catch (e) {
-                    print(e);
-                  }
-                },
-                child: const Text('gallery'),
-              ),
-            ],
-          ),
-        ],
+                      child: const Text('camera'),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () {
+                        ImageCubit.get(context)
+                            .pickImage(ImageSource.gallery)
+                            .then((value) {
+                          if (context.mounted) {
+                            AddCubit.get(context).pathImage = value;
+                            print("source.name $value");
+                          }
+                        });
+                      },
+                      child: const Text('gallery'),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          }
+          return const SizedBox();
+        },
       ),
     );
   }

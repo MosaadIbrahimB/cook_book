@@ -1,43 +1,33 @@
 import 'package:cook_book/core/utils/app_color.dart';
+import 'package:cook_book/feature/add/cubit/add_cubit.dart';
 import 'package:cook_book/feature/add/presentation/add_screen.dart';
 import 'package:cook_book/feature/favorite/favorite_screen.dart';
 import 'package:cook_book/feature/home/home_screen.dart';
-import 'package:cook_book/feature/home/presentation/cubit/category_cubit.dart';
+import 'package:cook_book/feature/home/presentation/cubit/home_cubit.dart';
+import 'package:cook_book/feature/layout/presentation/control/layout_cubit.dart';
 import 'package:cook_book/feature/layout/presentation/widget/app_bar_widget.dart';
 import 'package:cook_book/core/database/model/recipe_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LayoutScreen extends StatefulWidget {
+
+
+class LayoutScreen extends StatelessWidget {
   const LayoutScreen({super.key});
 
-  @override
-  State<LayoutScreen> createState() => _LayoutScreenState();
-}
-
-class _LayoutScreenState extends State<LayoutScreen> {
-  int index = 0;
-  List<Widget> screen = [
-    const HomeScreen(),
-   const FavScreen(),
-     const AddScreen()
-  ];
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<LayOutCubit, int>(
+  builder: (context, state) {
     return Scaffold(
       appBar: const AppBarWidget(),
-      body: BlocProvider(
-        create: (context) => CategoryCubit()..loadCategories(),
-        child: screen[index],
-      ),
+      body:LayOutCubit.get(context).screen[state],
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: index,
+          currentIndex: state,
           onTap: (value) {
             print(value);
-            setState(() {
-              index = value;
-            });
+            LayOutCubit.get(context).changeIndex(i: value);
           },
           backgroundColor: AppColor.listItemColor,
           selectedItemColor: AppColor.bottom,
@@ -48,7 +38,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
                 icon: Image.asset(
                   "assets/images/all_recipe.png",
                   height: 30,
-                  color: index == 0 ? AppColor.bottom : null,
+                  color: LayOutCubit.get(context).state == 0 ? AppColor.bottom : null,
                 ),
                 label: "Home"),
             const BottomNavigationBarItem(
@@ -67,6 +57,8 @@ class _LayoutScreenState extends State<LayoutScreen> {
             // BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "Favorite"),
           ]),
     );
+  },
+);
   }
 }
 

@@ -24,6 +24,7 @@ class RecipeModel {
 
   factory RecipeModel.fromJson(Map<String, dynamic> json) {
     return RecipeModel(
+      id: json["id"],
       nameRecipe: json["nameRecipe"],
       image: json["image"],
       prepTime: json["prepTime"],

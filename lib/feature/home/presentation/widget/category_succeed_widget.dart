@@ -1,5 +1,5 @@
 import 'package:cook_book/feature/home/data/category_data_model.dart';
-import 'package:cook_book/feature/home/presentation/cubit/category_cubit.dart';
+import 'package:cook_book/feature/home/presentation/cubit/home_cubit.dart';
 import 'package:cook_book/feature/home/presentation/widget/item_category_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,8 +19,8 @@ class CategorySucceedWidget extends StatelessWidget {
             onTap: () async{
               print("object $index");
               // await  DatabaseHelper.instance.deleteDB();
-              print(category.id);
-              BlocProvider.of<CategoryCubit>(context).deleteCategory(category.id??0);
+              // print(category.id);
+              // BlocProvider.of<CategoryCubit>(context).deleteCategory(category.id??0);
             },
             child: ItemCategoryWidget(
               categoryDataModel: category,
