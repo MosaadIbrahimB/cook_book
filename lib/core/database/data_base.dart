@@ -4,9 +4,9 @@ import 'package:path/path.dart';
 
 import 'model/recipe_model.dart';
 
-
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
+
   factory DatabaseHelper() => _instance;
   static Database? _database;
 
@@ -24,9 +24,8 @@ class DatabaseHelper {
       path,
       version: 5,
       onCreate: _onCreate,
-      onUpgrade: (db, oldVersion, newVersion) async{
+      onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 6) {
-
           await db.execute('''
        CREATE TABLE IF NOT EXISTS recipes(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -40,9 +39,6 @@ class DatabaseHelper {
         isFavorite INTEGER DEFAULT 0
       )
     ''');
-
-
-
         }
       },
     );
@@ -87,6 +83,36 @@ class DatabaseHelper {
     });
   }
 
+  Future<List<RecipeModel>> getRecipesByCategory(String category) async {
+    Database db = await database;
+    List<Map<String, dynamic>> maps =
+        await db.query('recipes', where: 'category = ?', whereArgs: [category]);
+    return List.generate(maps.length, (i) {
+      return RecipeModel.fromJson(maps[i]);
+    });
+  }
+
+  Future<List<RecipeModel>> searchByNameRecipe(String nameRecipe) async {
+    Database db = await database;
+    List<Map<String, dynamic>> maps = await db.query(
+      'recipes',
+      where: 'nameRecipe LIKE ?',
+      whereArgs: ['$nameRecipe%'],
+    );
+    return List.generate(maps.length, (i) {
+      return RecipeModel.fromJson(maps[i]);
+    });
+  }
+
+  Future<List<RecipeModel>> getFavRecipes() async {
+    Database db = await database;
+    List<Map<String, dynamic>> maps =
+        await db.query('recipes', where: 'isFavorite = ?', whereArgs: [1]);
+    return List.generate(maps.length, (i) {
+      return RecipeModel.fromJson(maps[i]);
+    });
+  }
+
   // تحديث وصفة
   Future<int> updateRecipe(RecipeModel recipe) async {
     Database db = await database;
@@ -107,7 +133,6 @@ class DatabaseHelper {
       whereArgs: [id],
     );
   }
-
 
   //------------------- التصنيفات -------------------
 
@@ -143,9 +168,10 @@ class DatabaseHelper {
 
   Future<List<CategoryDataModel>> fetchCategories() async {
     final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('categories'); // جلب البيانات من قاعدة البيانات
-    return result.map((json) => CategoryDataModel.fromJson(json)).toList(); // تحويل النتائج إلى قائمة من الكائنات
+    final List<Map<String, dynamic>> result =
+        await db.query('categories'); // جلب البيانات من قاعدة البيانات
+    return result
+        .map((json) => CategoryDataModel.fromJson(json))
+        .toList(); // تحويل النتائج إلى قائمة من الكائنات
   }
-
-
 }

@@ -5,7 +5,7 @@ import 'app/bloc_obs.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
-Bloc.observer=MyBlocObserver();
+  Bloc.observer=MyBlocObserver();
   runApp(const CookBookApp());
 }
 

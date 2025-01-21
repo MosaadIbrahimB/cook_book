@@ -16,26 +16,7 @@ class HomeScreen extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         // شريط البحث
-        SliverPadding(
-          padding: const EdgeInsets.all(8.0),
-          sliver: SliverToBoxAdapter(
-            child: TextField(
-              // controller: HomeCubit.get(context).searchController,
-              decoration: const InputDecoration(
-                hintText: 'Search for recipes...',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-                prefixIcon: Icon(Icons.search),
-                fillColor: Colors.white,
-                filled: true,
-              ),
-              onChanged: (value) {
-                print(value);
-              },
-            ),
-          ),
-        ),
+        const SearchWidget(),
         // النص الخاص بالفئات
         const SliverPadding(
           padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -44,15 +25,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         // قائمة الفئات
-        SliverPadding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          sliver: SliverToBoxAdapter(
-            child: SizedBox(
-                height: 100,
-                child: CategorySucceedWidget(
-                    categories: AddCubit.get(context).categoryList)),
-          ),
-        ),
+        const CategoryBannerWidget(),
         // قائمة الوصفات
         BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
@@ -74,21 +47,22 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-/*
-     //
-              // BlocBuilder<CategoryCubit, CategoryState>(
-              //   builder: (context, state) {
-              //     if (state is CategoryLoading) {
-              //       return const Center(child: CircularProgressIndicator());
-              //     }
-              //     if (state is CategoryError) {
-              //       return CategoryErrorWidget(message: state.message);
-              //     }
-              //     if (state is CategorySucceed) {
-              //       return CategorySucceedWidget(categories: state.categories);
-              //     }
-              //     return const CategoryErrorWidget(
-              //         message: "No result, try again...");
-              //   },
-              // ),
- */
+
+class CategoryBannerWidget extends StatelessWidget {
+  const CategoryBannerWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      sliver: SliverToBoxAdapter(
+        child: SizedBox(
+            height: 100,
+            child: CategorySucceedWidget(
+                categories: AddCubit.get(context).categoryList)),
+      ),
+    );
+  }
+}

@@ -18,14 +18,33 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeLoading());
     try {
       List<RecipeModel> recipeList = await DatabaseHelper().getRecipes();
-      for (var x in recipeList) {
-        print(x.image);
-      }
       emit(HomeSucceed(recipeList));
     } catch (e) {
       print(e);
     }
   }
+
+
+  Future<void> getRecipeByCategory(String category) async {
+    emit(HomeLoading());
+    try {
+      List<RecipeModel> recipeList = await DatabaseHelper().getRecipesByCategory(category);
+      emit(HomeSucceed(recipeList));
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> searchByNameRecipe(String nameRecipe) async {
+    emit(HomeLoading());
+    try {
+      List<RecipeModel> recipeList = await DatabaseHelper().searchByNameRecipe(nameRecipe);
+      emit(HomeSucceed(recipeList));
+    } catch (e) {
+      print(e);
+    }
+  }
+
   updateRecipe(RecipeModel recipe)async{
    await DatabaseHelper().updateRecipe(recipe);
   }

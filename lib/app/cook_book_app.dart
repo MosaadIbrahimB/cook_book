@@ -1,5 +1,6 @@
 import 'package:cook_book/feature/add/cubit/add_cubit.dart';
 import 'package:cook_book/feature/add/cubit/image_cubit.dart';
+import 'package:cook_book/feature/favorite/cubit/fav_cubit.dart';
 import 'package:cook_book/feature/home/presentation/cubit/home_cubit.dart';
 import 'package:cook_book/feature/layout/presentation/layout_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +14,12 @@ class CookBookApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => AddCubit() ),
-        BlocProvider(create: (context) => LayOutCubit() ),
-        BlocProvider(create: (context) => HomeCubit()..getRecipe() ),
-    BlocProvider(
-    create: (context) => ImageCubit(),)
+        BlocProvider(create: (context) => AddCubit()),
+        BlocProvider(create: (context) => LayOutCubit()),
+        BlocProvider(create: (context) => HomeCubit()..getRecipe()),
+        BlocProvider(create: (context) => ImageCubit()),
+        BlocProvider(create: (context) => FavCubit()..getFvaRecipe()),
       ],
-
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'CookBook',
@@ -29,10 +29,10 @@ class CookBookApp extends StatelessWidget {
             titleLarge: TextStyle(
                 fontFamily: 'Arial', fontWeight: FontWeight.bold, fontSize: 18),
           ),
-          scaffoldBackgroundColor: const Color(
-              0xFFFFF8DC), // cornsilk background
+          scaffoldBackgroundColor:
+              const Color(0xFFFFF8DC), // cornsilk background
         ),
-        home: LayoutScreen(),
+        home: const LayoutScreen(),
       ),
     );
   }

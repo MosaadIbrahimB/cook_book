@@ -1,5 +1,6 @@
 import 'package:cook_book/core/database/data_base.dart';
 import 'package:cook_book/core/database/model/recipe_model.dart';
+import 'package:cook_book/feature/favorite/cubit/fav_cubit.dart';
 import 'package:cook_book/feature/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -20,63 +21,53 @@ class CookTimeAndPrepTimeWidget extends StatelessWidget {
         const SizedBox(width: 4),
         Text("${recipeModel.cookTime} cookTime"),
         const SizedBox(width: 16),
-        recipeModel.isFavorite == 0?
-        IconButton(
-          icon:  const Icon(
-            Icons.favorite_border,
+        recipeModel.isFavorite == 0
+            ? IconButton(
+                icon: const Icon(
+                  Icons.favorite_border,
+                ),
+                onPressed: () {
+                  print("${recipeModel.id}");
+                  print("${recipeModel.isFavorite}");
+                  RecipeModel recipe = RecipeModel(
+                      id: recipeModel.id,
+                      nameRecipe: recipeModel.nameRecipe,
+                      category: recipeModel.category,
+                      image: recipeModel.image,
+                      instructions: recipeModel.instructions,
+                      ingredients: recipeModel.ingredients,
+                      prepTime: recipeModel.prepTime,
+                      cookTime: recipeModel.cookTime,
+                      isFavorite: 1);
+                  DatabaseHelper().updateRecipe(recipe);
+                  HomeCubit.get(context).getRecipe();
+                  FavCubit.get(context).getFvaRecipe();
+                },
+              )
+            : IconButton(
+                icon: const Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                ),
+                onPressed: () {
 
-          ),
-          onPressed: () {
-            print("${recipeModel.id}");
-            print("${recipeModel.isFavorite}");
-            RecipeModel recipe = RecipeModel(
-                id: recipeModel.id,
-                nameRecipe: recipeModel.nameRecipe,
-                category: recipeModel.category,
-                image: recipeModel.image,
-                instructions: recipeModel.instructions,
-                ingredients
-                    : recipeModel.ingredients,
-                prepTime
-                    : recipeModel.prepTime,
-                cookTime
-                    : recipeModel.cookTime,
-                isFavorite
-                :1);
-            DatabaseHelper().updateRecipe(recipe);
-            HomeCubit.get(context).getRecipe();
-          },
-        ):
-        IconButton(
-          icon:  const Icon(
-            Icons.favorite,
-color: Colors.red,
-          ),
-          onPressed: () {
-            print("${recipeModel.id}");
-            print("${recipeModel.isFavorite}");
-            RecipeModel recipe = RecipeModel(
-                id: recipeModel.id,
-                nameRecipe: recipeModel.nameRecipe,
-                category: recipeModel.category,
-                image: recipeModel.image,
-                instructions: recipeModel.instructions,
-                ingredients
-                    : recipeModel.ingredients,
-                prepTime
-                    : recipeModel.prepTime,
-                cookTime
-                    : recipeModel.cookTime,
-                isFavorite
-                :0);
-            DatabaseHelper().updateRecipe(recipe);
-            HomeCubit.get(context).getRecipe();
+                  RecipeModel recipe = RecipeModel(
+                      id: recipeModel.id,
+                      nameRecipe: recipeModel.nameRecipe,
+                      category: recipeModel.category,
+                      image: recipeModel.image,
+                      instructions: recipeModel.instructions,
+                      ingredients: recipeModel.ingredients,
+                      prepTime: recipeModel.prepTime,
+                      cookTime: recipeModel.cookTime,
+                      isFavorite: 0);
+                  DatabaseHelper().updateRecipe(recipe);
+                  HomeCubit.get(context).getRecipe();
+                  FavCubit.get(context).getFvaRecipe();
 
-          },
-        )
-        ,
+                },
+              ),
         const Text("favorite"),
-
       ],
     );
   }

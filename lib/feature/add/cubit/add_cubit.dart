@@ -25,6 +25,8 @@ class AddCubit extends Cubit<AddState> {
 
   final List<CategoryDataModel> categoryList = [
     CategoryDataModel(
+        image: AppImagePath.general, categoryName: 'General'),
+    CategoryDataModel(
         image: AppImagePath.mainFood, categoryName: 'Main Course'),
     CategoryDataModel(image: AppImagePath.dessert, categoryName: 'Dessert'),
     CategoryDataModel(image: AppImagePath.appetizers, categoryName: 'Appetizer')

@@ -17,10 +17,4 @@ int index=0;
  changeIndex({int i = 0}){
     emit(i);
   }
-
-
-
 }
-
-
-abstract class LayOutState{}
