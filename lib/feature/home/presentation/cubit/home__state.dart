@@ -18,3 +18,9 @@ class HomeError extends HomeState {
 
   HomeError(this.message);
 }
+
+class HomeUpdateFav extends HomeState {
+  int isFav;
+
+  HomeUpdateFav({required this.isFav});
+}
