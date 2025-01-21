@@ -24,7 +24,7 @@ class CookTimeAndPrepTimeWidget extends StatelessWidget {
             //     : Icons.favorite_border,
           ),
           onPressed: () {
-            // يمكنك إضافة منطق الإعجاب هنا
+           print("ssssssssssssss");
           },
         ),
         const Text("favorite"),

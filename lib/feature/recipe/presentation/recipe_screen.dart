@@ -1,26 +1,22 @@
 import 'package:cook_book/core/database/model/recipe_model.dart';
-import 'package:cook_book/feature/home/presentation/cubit/home_cubit.dart';
 import 'package:cook_book/feature/recipe/presentation/widget/card_widget.dart';
 import 'package:cook_book/feature/recipe/presentation/widget/cook_time_and_prep_time_widget.dart';
 import 'package:cook_book/feature/recipe/presentation/widget/image_recipe_widget.dart';
+import 'package:cook_book/feature/recipe/presentation/widget/slide_widget.dart';
 import 'package:flutter/material.dart';
 
 class ListRecipeWidget extends StatelessWidget {
- final List<RecipeModel>recipeList;
+  final List<RecipeModel> recipeList;
   const ListRecipeWidget({super.key, required this.recipeList});
+
 
   @override
   Widget build(BuildContext context) {
     return SliverList.builder(
       itemCount: recipeList.length,
       itemBuilder: (context, index) {
-
-        return InkWell(
-          onTap: () {
-            HomeCubit.get(context).deleteItem(recipeList[index].id??0);
-            HomeCubit.get(context).getRecipe();
-            print("delete ${recipeList[index].image}");
-          },
+        return SlideWidget(
+        id: recipeList[index].id??0,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: CardWidget(
@@ -28,7 +24,7 @@ class ListRecipeWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // صورة الوصفة
-                  ImageRecipeWidget(recipeModel:recipeList[index]),
+                  ImageRecipeWidget(recipeModel: recipeList[index]),
                   // معلومات الوصفة
                   Padding(
                     padding: const EdgeInsets.all(16.0),
@@ -45,7 +41,8 @@ class ListRecipeWidget extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         // وقت التحضير والطهي
-                        CookTimeAndPrepTimeWidget(recipeModel: recipeList[index]),
+                        CookTimeAndPrepTimeWidget(
+                            recipeModel: recipeList[index]),
                         const SizedBox(height: 8),
                         // فئة الوصفة
                         Chip(
@@ -94,5 +91,4 @@ class ListRecipeWidget extends StatelessWidget {
     );
   }
 }
-
 
