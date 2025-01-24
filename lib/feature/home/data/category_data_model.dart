@@ -1,5 +1,3 @@
-import 'package:cook_book/core/utils/app_image_path.dart';
-
 class CategoryDataModel {
   final int? id; // إضافة id كخاصية اختيارية
   final String categoryName;
@@ -30,10 +28,3 @@ class CategoryDataModel {
   }
 }
 
-
-List<CategoryDataModel>listCateGoryName=[
-  CategoryDataModel(categoryName: "Appetizers",image: AppImagePath.appetizers),
-  CategoryDataModel(categoryName: "Main Courses",image: AppImagePath.mainFood),
-  CategoryDataModel(categoryName: "Desserts",image: AppImagePath.dessert),
-
-];

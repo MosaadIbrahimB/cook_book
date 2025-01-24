@@ -13,6 +13,7 @@ class AddCubit extends Cubit<AddState> {
   AddCubit() : super(RecipeInitial());
 
   static AddCubit get(context) => BlocProvider.of(context);
+  var keyForm = GlobalKey<FormState>();
   TextEditingController? nameRecipeController = TextEditingController();
   TextEditingController? preparationTimeController = TextEditingController();
   TextEditingController? cookingTimeController = TextEditingController();
@@ -24,20 +25,18 @@ class AddCubit extends Cubit<AddState> {
   String? pathImage;
 
   final List<CategoryDataModel> categoryList = [
-    CategoryDataModel(
-        image: AppImagePath.general, categoryName: 'General'),
+    CategoryDataModel(image: AppImagePath.general, categoryName: 'General'),
     CategoryDataModel(
         image: AppImagePath.mainFood, categoryName: 'Main Course'),
     CategoryDataModel(image: AppImagePath.dessert, categoryName: 'Dessert'),
     CategoryDataModel(image: AppImagePath.appetizers, categoryName: 'Appetizer')
   ];
 
-
-
   Future<void> saveRecipe() async {
-print("in $pathImage");
+    print("in $pathImage");
     try {
-      await DatabaseHelper().insertRecipe(
+      await DatabaseHelper()
+          .insertRecipe(
         RecipeModel(
             nameRecipe: nameRecipeController!.text,
             category: selectedCategory ?? "Main Course",
@@ -52,20 +51,20 @@ print("in $pathImage");
             isFavorite: int.parse(isFavoriteTimeController!.text.isEmpty
                 ? "0"
                 : isFavoriteTimeController!.text),
-            image: pathImage ?? "/data/user/0/com.example.cook_book/cache/f43cf834-0150-4239-adeb-56690ce8f8e33050916381320516214.jpg"),
-      ).then((value) {
-        clearController();
-      },);
-      
-      
-      
-      
+            image: pathImage ??
+                AppImagePath.f1),
+      )
+          .then(
+        (value) {
+          clearController();
+        },
+      );
     } catch (e) {
       print(e);
     }
   }
 
-  clearController(){
+  clearController() {
     nameRecipeController?.clear();
     preparationTimeController?.clear();
     cookingTimeController?.clear();
@@ -73,12 +72,8 @@ print("in $pathImage");
     instructionsTimeController?.clear();
     isFavoriteTimeController?.clear();
     imageTimeController?.clear();
-    selectedCategory='Main Course';
-
-
+    selectedCategory = 'Main Course';
   }
-
-
 }
 // void updateRecipeName(String value) {
 //   recipe = recipe.copyWith(name: value);

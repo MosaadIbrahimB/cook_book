@@ -11,11 +11,7 @@ import '../cubit/image_cubit.dart';
 
 class AddScreen extends StatelessWidget {
   const AddScreen({super.key});
-/*
-const Text(
-          'Add Recipe',
-        ),
- */
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AddCubit, AddState>(
@@ -24,15 +20,22 @@ const Text(
         return Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
+            key: cubit.keyForm,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 20,),
                   TextFormField(
+                    validator: (value) {
+                      if(value?.trim()==''){
+                        return "Enter name recipe";
+                      }
+                      return null;
+                    },
                     controller: cubit.nameRecipeController,
                     decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Recipe Name'),
+                        border: OutlineInputBorder(), labelText: 'Recipe Name'),
                   ),
                   const SizedBox(height: 10),
                   TextFormField(
@@ -75,15 +78,21 @@ const Text(
                   Center(
                     child: ElevatedButton(
                       onPressed: () async {
-                        cubit.saveRecipe().then((value) {
-    if (context.mounted) {
-      LayOutCubit.get(context).changeIndex(i: 0);
-      HomeCubit.get(context).getRecipe();
-      AddCubit.get(context).pathImage = null;
-      ImageCubit.get(context).initialCubit();
-    }
+                        bool b=cubit.keyForm.currentState!.validate();
+                        if (b) {
+                          cubit.saveRecipe().then(
+                                (value) {
+                              if (context.mounted) {
+                                LayOutCubit.get(context).changeIndex(i: 0);
+                                HomeCubit.get(context).getRecipe();
+                                AddCubit.get(context).pathImage = null;
+                                ImageCubit.get(context).initialCubit();
+                              }
+                            },
+                          );
+                        }
 
-                        },);
+
                       },
                       child: const Text("save"),
                     ),

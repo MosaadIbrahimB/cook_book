@@ -21,7 +21,7 @@ class ImageRecipeWidget extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.fill,
           image:
-          FileImage(File(recipeModel.image??"")),
+          FileImage(File(recipeModel.image??AppImagePath.f1)),
 
           // AssetImage(
           //   recipeModel.image ?? AppImagePath.dessert,

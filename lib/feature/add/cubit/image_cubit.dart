@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:math';
+import 'package:cook_book/core/utils/app_image_path.dart';
 import 'package:cook_book/feature/add/cubit/image_state.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:bloc/bloc.dart';
@@ -22,7 +24,8 @@ class ImageCubit extends Cubit<ImageState> {
 
       if (pickedFile != null) {
         emit(ImageSucceed(file: File(pickedFile.path)));
-        return pickedFile.path;
+
+        return pickedFile.path.isEmpty?AppImagePath.f1:pickedFile.path;
 
       } else {
 

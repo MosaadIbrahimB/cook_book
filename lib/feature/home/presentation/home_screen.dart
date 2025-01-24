@@ -1,12 +1,4 @@
-import 'package:cook_book/feature/home/presentation/cubit/home_cubit.dart';
-import 'package:cook_book/feature/home/presentation/cubit/home__state.dart';
-import 'package:cook_book/feature/home/presentation/widget/categories_text_widget.dart';
-import 'package:cook_book/feature/home/presentation/widget/category_banner_widget.dart';
-import 'package:cook_book/feature/home/presentation/widget/search_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../recipe/presentation/recipe_screen.dart';
+import 'home_import_file.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

@@ -2,7 +2,7 @@ import 'package:cook_book/core/utils/app_color.dart';
 import 'package:cook_book/feature/add/cubit/add_cubit.dart';
 import 'package:cook_book/feature/add/presentation/add_screen.dart';
 import 'package:cook_book/feature/favorite/favorite_screen.dart';
-import 'package:cook_book/feature/home/home_screen.dart';
+import 'package:cook_book/feature/home/presentation/home_screen.dart';
 import 'package:cook_book/feature/home/presentation/cubit/home_cubit.dart';
 import 'package:cook_book/feature/layout/presentation/control/layout_cubit.dart';
 import 'package:cook_book/feature/layout/presentation/widget/app_bar_widget.dart';
