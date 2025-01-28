@@ -134,6 +134,19 @@ class DatabaseHelper {
     );
   }
 
+
+
+  Future<void> updateRecipeFavoriteStatus(int id, int isFavorite) async {
+    final db = await database;
+    await db.update(
+      'recipes',
+      {'isFavorite': isFavorite}, // القيم المحدثة
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+
   //------------------- التصنيفات -------------------
 
   Future<int> insertCategory(CategoryDataModel category) async {

@@ -34,6 +34,7 @@ class _FavScreenState extends State<FavScreen> {
               return const SliverToBoxAdapter(child: Center(child: Text("No Favorite Recipe yet"),));
             }
             return ListRecipeWidget(
+              isFavScreen: true,
               recipeList: state.recipeList,
             );
           }

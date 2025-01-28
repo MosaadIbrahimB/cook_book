@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 
 class ListRecipeWidget extends StatelessWidget {
   final List<RecipeModel> recipeList;
-  const ListRecipeWidget({super.key, required this.recipeList});
+  final bool isFavScreen;
+  const ListRecipeWidget({super.key, required this.recipeList, this.isFavScreen=false});
 
 
   @override
@@ -16,6 +17,7 @@ class ListRecipeWidget extends StatelessWidget {
       itemCount: recipeList.length,
       itemBuilder: (context, index) {
         return SlideWidget(
+          isFavScreen: isFavScreen,
         id: recipeList[index].id??0,
           child: Padding(
             padding: const EdgeInsets.all(8),

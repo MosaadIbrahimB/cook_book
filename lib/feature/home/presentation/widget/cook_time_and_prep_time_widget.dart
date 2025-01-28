@@ -45,18 +45,7 @@ class CookTimeAndPrepTimeIconFavoriteWidget extends StatelessWidget {
   }
 
   changFavRecipe(int fav, BuildContext context) {
-    RecipeModel recipe = RecipeModel(
-        id: recipeModel.id,
-        nameRecipe: recipeModel.nameRecipe,
-        category: recipeModel.category,
-        image: recipeModel.image,
-        instructions: recipeModel.instructions,
-        ingredients: recipeModel.ingredients,
-        prepTime: recipeModel.prepTime,
-        cookTime: recipeModel.cookTime,
-        isFavorite: fav);
-    HomeCubit.get(context).updateRecipe(recipe);
-    HomeCubit.get(context).getRecipe();
+    HomeCubit.get(context).updateRecipeFavoriteStatus(recipeModel.id??-1,fav);
     FavCubit.get(context).getFvaRecipe();
   }
 }

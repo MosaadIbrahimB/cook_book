@@ -51,4 +51,30 @@ class RecipeModel {
       "isFavorite": isFavorite,
     };
   }
+
+
+
+  RecipeModel copyWith({
+    int? id,
+    String? nameRecipe,
+    String? image,
+    int? prepTime,
+    int? cookTime,
+    List<String>? ingredients,
+    String? instructions,
+    String? category,
+    int? isFavorite,
+  }) {
+    return RecipeModel(
+      id: id ?? this.id,
+      nameRecipe: nameRecipe ?? this.nameRecipe,
+      image: image ?? this.image,
+      prepTime: prepTime ?? this.prepTime,
+      cookTime: cookTime ?? this.cookTime,
+      ingredients: ingredients ?? this.ingredients,
+      instructions: instructions ?? this.instructions,
+      category: category ?? this.category,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
 }

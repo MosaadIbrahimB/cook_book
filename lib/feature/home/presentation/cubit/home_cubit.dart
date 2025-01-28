@@ -10,14 +10,12 @@ class HomeCubit extends Cubit<HomeState> {
 
   static HomeCubit get(context) => BlocProvider.of(context);
 
-
   List<RecipeModel> recipes = [];
-
 
   Future<void> getRecipe() async {
     emit(HomeLoading());
     try {
-      List<RecipeModel> recipes = await DatabaseHelper().getRecipes();
+     recipes = await DatabaseHelper().getRecipes();
       emit(HomeSucceed(recipes));
     } catch (e) {
       print(e);
@@ -25,9 +23,31 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
 
-  updateRecipe(RecipeModel recipe)async{
-    await DatabaseHelper().updateRecipe(recipe);
+
+  Future<void> updateRecipeFavoriteStatus(int id, int isFavorite) async {
+    try {
+      // تحديث العنصر في قاعدة البيانات
+      await DatabaseHelper().updateRecipeFavoriteStatus(id, isFavorite);
+
+      // تحديث العنصر داخل القائمة
+      int index = recipes.indexWhere((recipe) => recipe.id == id);
+      if (index != -1) {
+        recipes[index] = recipes[index].copyWith(isFavorite: isFavorite); // تعديل العنصر
+        emit(HomeSucceed(List.from(recipes))); // إرسال الحالة الجديدة
+      }
+    } catch (e) {
+      print(e);
+    }
   }
+
+
+
+
+
+
+  // updateRecipe(RecipeModel recipe)async{
+  //   await DatabaseHelper().updateRecipe(recipe);
+  // }
 
   Future<void> searchByNameRecipe(String nameRecipe) async {
     emit(HomeLoading());
@@ -38,44 +58,6 @@ class HomeCubit extends Cubit<HomeState> {
       print(e);
     }
   }
-
-
-
-
-
-  Future<void> updateFavoriteStatus(RecipeModel recipe, int newFavoriteValue) async {
-    try {
-      // تحديث قاعدة البيانات
-      RecipeModel updatedRecipe = RecipeModel(
-        id: recipe.id,
-        nameRecipe: recipe.nameRecipe,
-        category: recipe.category,
-        image: recipe.image,
-        instructions: recipe.instructions,
-        ingredients: recipe.ingredients,
-        prepTime: recipe.prepTime,
-        cookTime: recipe.cookTime,
-        isFavorite: newFavoriteValue,
-      );
-      await DatabaseHelper().updateRecipe(updatedRecipe);
-
-      // تحديث العنصر في القائمة الحالية
-      for (int i = 0; i < recipes.length; i++) {
-        if (recipes[i].id == recipe.id) {
-          recipes[i] = updatedRecipe;
-          break;
-        }
-      }
-
-      emit(HomeSucceed(recipes)); // إعادة بناء الحالة
-    } catch (e) {
-      print(e);
-    }
-  }
-
-
-
-
 
 
 
