@@ -1,13 +1,23 @@
-import 'package:cook_book/feature/recipe/presentation/recipe_screen.dart';
+import 'package:cook_book/feature/home/presentation/widget/list_recipe_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/database/model/recipe_model.dart';
 import 'cubit/fav_cubit.dart';
 import 'cubit/fav_state.dart';
 
-class FavScreen extends StatelessWidget {
+class FavScreen extends StatefulWidget {
   const FavScreen({super.key});
 
+  @override
+  State<FavScreen> createState() => _FavScreenState();
+}
+
+class _FavScreenState extends State<FavScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(slivers: [

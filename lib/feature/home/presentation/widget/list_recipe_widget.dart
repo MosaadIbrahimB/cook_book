@@ -1,8 +1,8 @@
 import 'package:cook_book/core/database/model/recipe_model.dart';
-import 'package:cook_book/feature/recipe/presentation/widget/card_widget.dart';
-import 'package:cook_book/feature/recipe/presentation/widget/cook_time_and_prep_time_widget.dart';
-import 'package:cook_book/feature/recipe/presentation/widget/image_recipe_widget.dart';
-import 'package:cook_book/feature/recipe/presentation/widget/slide_widget.dart';
+import 'package:cook_book/feature/home/presentation/widget/card_widget.dart';
+import 'package:cook_book/feature/home/presentation/widget/cook_time_and_prep_time_widget.dart';
+import 'package:cook_book/feature/home/presentation/widget/image_recipe_widget.dart';
+import 'package:cook_book/feature/home/presentation/widget/slide_widget.dart';
 import 'package:flutter/material.dart';
 
 class ListRecipeWidget extends StatelessWidget {
@@ -41,7 +41,7 @@ class ListRecipeWidget extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         // وقت التحضير والطهي
-                        CookTimeAndPrepTimeWidget(
+                        CookTimeAndPrepTimeIconFavoriteWidget(
                             recipeModel: recipeList[index]),
                         const SizedBox(height: 8),
                         // فئة الوصفة

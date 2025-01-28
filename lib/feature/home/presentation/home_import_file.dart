@@ -5,7 +5,7 @@ export 'package:cook_book/feature/home/presentation/widget/category_banner_widge
 export 'package:cook_book/feature/home/presentation/widget/search_widget.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
-export 'package:cook_book/feature/recipe/presentation/recipe_screen.dart';
+export 'package:cook_book/feature/home/presentation/widget/list_recipe_widget.dart';
 
 
 

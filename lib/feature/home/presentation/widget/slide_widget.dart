@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../../../home/presentation/cubit/home_cubit.dart';
+import '../cubit/home_cubit.dart';
 
 class SlideWidget extends StatelessWidget {
   final Widget child;
