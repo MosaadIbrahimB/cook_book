@@ -1,16 +1,9 @@
 # cook_book
 
-A new Flutter project.
+## 🍽️ Cook Book App using Flutter & Cubit
+Cook Book App is an application for saving food recipes.
 
-## Getting Started
+sqflite was used as a local database to store data, allowing easy addition, updating, and deletion of recipes.
 
-This project is a starting point for a Flutter application.
+https://github.com/user-attachments/assets/d9d51677-8e5b-423d-9eba-aceaf4d6bce4
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
