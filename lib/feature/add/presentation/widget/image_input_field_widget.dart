@@ -1,8 +1,6 @@
 import 'package:cook_book/feature/add/cubit/add_cubit.dart';
 import 'package:cook_book/feature/add/cubit/image_cubit.dart';
 import 'package:cook_book/feature/add/cubit/image_state.dart';
-import 'package:cook_book/feature/home/presentation/cubit/home_cubit.dart';
-import 'package:cook_book/feature/layout/presentation/control/layout_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';

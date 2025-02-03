@@ -1,5 +1,4 @@
 import 'package:cook_book/core/utils/app_color.dart';
-import 'package:cook_book/feature/favorite/cubit/fav_cubit.dart';
 import 'package:cook_book/feature/layout/presentation/control/layout_cubit.dart';
 import 'package:cook_book/feature/layout/presentation/widget/app_bar_widget.dart';
 import 'package:flutter/material.dart';

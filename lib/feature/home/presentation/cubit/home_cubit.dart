@@ -1,7 +1,6 @@
 import 'package:cook_book/core/database/model/recipe_model.dart';
 import 'package:cook_book/feature/home/presentation/cubit/home__state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sqflite/sqflite.dart';
 
 import '../../../../core/database/data_base.dart';
 
